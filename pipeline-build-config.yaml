@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: BuildConfig
+metadata:
+  name: syed-mashaddy.springjava-smm
+  labels:
+    app: springjava-smm
+spec:
+  triggers:
+    - type: GitHub
+      github:
+        secret: secret101
+  source:
+    git:
+      uri: 'https://github.com/Syed-Mashaddy/springjava-smm.git'
+      ref: master
+  strategy:
+    jenkinsPipelineStrategy:
+      jenkinsfilePath: Jenkinsfile
+      env:
+        - name: CLOUD_NAME
+          value: openshift
+        - name: NAMESPACE
+          value: project-smm2
+        - name: BRANCH
+          value: master
